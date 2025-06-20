@@ -8,8 +8,8 @@
   "scripts": {
     "build": "tsup",
     "postbuild": "node scripts/postbuild.mjs",
-    "test": "yarn test:build && node test/babel.js && node test/typescript.js",
-    "test:build": "yarn test:babel && yarn test:ts",
+    "test": "pnpm run test:build && node test/babel.js && node test/typescript.js",
+    "test:build": "pnpm run test:babel && pnpm run test:ts",
     "test:babel": "babel --plugins @babel/plugin-transform-react-jsx --presets @babel/preset-env test/babel.jsx -d test",
     "test:ts": "tsc test/typescript.tsx --jsx react --jsxFactory DiscordComponents.createComponent --jsxFragmentFactory DiscordComponents.Fragment --outDir test"
   },
