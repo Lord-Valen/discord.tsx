@@ -1,7 +1,7 @@
 /* Clean up out dir */
 
 import { readdir, stat } from "node:fs/promises";
-import rimraf from "rimraf";
+import { rimraf } from "rimraf";
 
 const dirs = await readdir("./out");
 const rimrafp = (path) => new Promise((resolve, reject) => {
