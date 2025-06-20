@@ -1,7 +1,26 @@
 {
   "name": "discord.tsx",
-  "version": "3.0.0",
   "description": "Create Discord.js components in JSX",
+  "version": "3.0.0",
+  "author": "DevAndromeda",
+  "license": "MIT",
+  "homepage": "https://github.com/Lord-Valen/discord.tsx#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Lord-Valen/discord.tsx.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Lord-Valen/discord.tsx/issues"
+  },
+  "keywords": [
+    "tsx-discord.js",
+    "discord.jsx",
+    "jsx",
+    "components",
+    "discord-buttons",
+    "react",
+    "tsx"
+  ],
   "main": "out/index.js",
   "types": "out/index.d.ts",
   "module": "out/index.mjs",
@@ -16,25 +35,6 @@
   "files": [
     "out"
   ],
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/DevAndromeda/discord.tsx.git"
-  },
-  "keywords": [
-    "tsx-discord.js",
-    "discord.jsx",
-    "jsx",
-    "components",
-    "discord-buttons",
-    "react",
-    "tsx"
-  ],
-  "author": "DevAndromeda",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/DevAndromeda/discord.tsx/issues"
-  },
-  "homepage": "https://github.com/DevAndromeda/discord.tsx#readme",
   "devDependencies": {
     "@babel/cli": "^7.16.8",
     "@babel/core": "^7.16.7",
