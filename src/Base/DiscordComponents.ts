@@ -1,7 +1,5 @@
 import {
     MessageActionRow as DiscordMessageActionRow,
-    MessageButtonOptions,
-    MessageSelectOptionData,
     MessageEmbed
 } from "discord.js";
 import { Component, MessageElement, ComponentCreateTypes } from "../typings/types";

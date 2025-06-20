@@ -6,7 +6,7 @@ import {
     MessageSelectMenuOptions,
     MessageSelectOptionData
 } from "discord.js";
-import { MessageElement, ChildrenType } from "../typings/types";
+import { MessageElement, ChildrenType } from "../typings/types.js";
 
 export default function handleData(component: MessageElement): DiscordMessageActionRow {
     const actionRow = new DiscordMessageActionRow();

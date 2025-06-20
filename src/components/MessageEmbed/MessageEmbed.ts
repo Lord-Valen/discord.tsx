@@ -5,7 +5,7 @@ import {
     MessageEmbedImage as DiscordMessageEmbedImage,
     MessageEmbedThumbnail as DiscordMessageEmbedThumbnail
 } from "discord.js";
-import { MessageElement, EmbedProps } from "../../typings/types";
+import { MessageElement, EmbedProps } from "../../typings/types.js";
 
 export function MessageEmbed(props: EmbedProps, children: MessageElement[]) {
     return {

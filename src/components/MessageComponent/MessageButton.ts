@@ -1,5 +1,5 @@
 import { MessageButtonOptions } from "discord.js";
-import { MessageElement } from "../../typings/types";
+import { MessageElement } from "../../typings/types.js";
 
 export function MessageButton(props: MessageButtonOptions, _children: undefined) {
     return {

@@ -1,5 +1,5 @@
 import { MessageActionRowOptions } from "discord.js";
-import { MessageElement } from "../../typings/types";
+import { MessageElement } from "../../typings/types.js";
 
 export function MessageActionRow(props: {}, children: MessageElement[]) {
     return {

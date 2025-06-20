@@ -1,5 +1,5 @@
 import { EmbedFieldData, MessageEmbed, MessageEmbedAuthor, MessageEmbedFooter, MessageEmbedImage, MessageEmbedThumbnail } from "discord.js";
-import { MessageElement, EmbedProps } from "../typings/types";
+import { MessageElement, EmbedProps } from "../typings/types.js";
 
 export default function handleData(component: MessageElement) {
     const props = component.props as EmbedProps ?? {};
@@ -24,7 +24,7 @@ export default function handleData(component: MessageElement) {
 
                 applyFields(fields);
             }
-            break;
+                break;
             case "MessageEmbedAuthor": {
                 const data = child.props as MessageEmbedAuthor;
                 embed.setAuthor({
@@ -33,7 +33,7 @@ export default function handleData(component: MessageElement) {
                     url: data.url
                 })
             }
-            break;
+                break;
             case "MessageEmbedFooter": {
                 const data = child.props as MessageEmbedFooter;
                 embed.setFooter({
@@ -41,17 +41,17 @@ export default function handleData(component: MessageElement) {
                     iconURL: data.iconURL
                 });
             }
-            break;
+                break;
             case "MessageEmbedImage": {
                 const data = child.props as MessageEmbedImage;
                 embed.setImage(data.url);
             }
-            break;
+                break;
             case "MessageEmbedThumbnail": {
                 const data = child.props as MessageEmbedThumbnail;
                 embed.setThumbnail(data.url);
             }
-            break;
+                break;
             default:
                 throw new TypeError(`Unsupported child type "${child.type}"!`);
         }

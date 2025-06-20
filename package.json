@@ -2,6 +2,7 @@
   "name": "discord.tsx",
   "description": "Create Discord.js components in JSX",
   "version": "3.0.0",
+  "type": "module",
   "author": "DevAndromeda",
   "license": "MIT",
   "homepage": "https://github.com/Lord-Valen/discord.tsx#readme",
@@ -27,6 +28,7 @@
   "scripts": {
     "build": "tsup",
     "postbuild": "node scripts/postbuild.mjs",
+    "lint": "tsc --noEmit",
     "test": "pnpm run test:build && node test/babel.js && node test/typescript.js",
     "test:build": "pnpm run test:babel && pnpm run test:ts",
     "test:babel": "babel --plugins @babel/plugin-transform-react-jsx --presets @babel/preset-env test/babel.jsx -d test",

@@ -1,5 +1,5 @@
 import { MessageSelectMenuOptions, MessageSelectOptionData } from "discord.js";
-import { MessageElement } from "../../typings/types";
+import { MessageElement } from "../../typings/types.js";
 
 export function MessageSelectMenu(props: MessageSelectMenuOptions, children: MessageElement[]) {
     return {
