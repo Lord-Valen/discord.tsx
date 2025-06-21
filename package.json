@@ -22,9 +22,11 @@
     "react",
     "tsx"
   ],
-  "main": "out/index.js",
-  "types": "out/index.d.ts",
-  "module": "out/index.mjs",
+  "types": "./out/index.d.ts",
+  "exports": {
+    "import": "./out/index.js",
+    "require": "./out/index.cjs"
+  },
   "scripts": {
     "build": "tsup",
     "postbuild": "node scripts/postbuild.mjs",
