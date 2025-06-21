@@ -14,7 +14,7 @@ import {
     MessageEmbedFooter,
     MessageEmbedImage,
     MessageEmbedThumbnail,
-} from "../out/index";
+} from "../out/index.js";
 
 const components = (
     <>

@@ -27,14 +27,15 @@
     "import": "./out/index.js",
     "require": "./out/index.cjs"
   },
+  "packageManager": "pnpm@10.12.1",
   "scripts": {
     "build": "tsup",
     "postbuild": "node scripts/postbuild.mjs",
     "lint": "tsc --noEmit",
-    "test": "pnpm run test:build && node test/babel.js && node test/typescript.js",
-    "test:build": "pnpm run test:babel && pnpm run test:ts",
-    "test:babel": "babel --plugins @babel/plugin-transform-react-jsx --presets @babel/preset-env test/babel.jsx -d test",
-    "test:ts": "tsc test/typescript.tsx --jsx react --jsxFactory DiscordComponents.createComponent --jsxFragmentFactory DiscordComponents.Fragment --outDir test"
+    "test:babel": "node test/babel.js",
+    "test:babel:build": "babel test/babel.jsx -d test",
+    "test:ts": "node test/typescript.js",
+    "test:ts:build": "tsc test/typescript.tsx --outDir test"
   },
   "files": [
     "out"
@@ -49,6 +50,7 @@
     "rimraf": "^6.0.1",
     "tsup": "^8.5.0",
     "tsx": "^4.20.3",
+    "turbo": "^2.5.4",
     "typescript": "5.8.3"
   }
 }
