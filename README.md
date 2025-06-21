@@ -15,6 +15,7 @@ $ npm i discord.js
 # Env Setup
 
 ## TypeScript
+
 ### Add these in your **`tsconfig.json`#compilerOptions**
 
 ```json
@@ -34,36 +35,34 @@ Specify pragma for custom jsx factory with **[`@babel/plugin-transform-react-jsx
 
 # Components Available
 
-- MessageActionRow
-- MessageButton
-- MessageSelectMenu
-- MessageEmbed
+- ActionRow
+- Button
+- StringSelectMenu
+- Embed
 
 ## Root Fragment Data
-Root fragment: `<>...</>` returns `{ embeds: MessageEmbed[], components: MessageActionRow[] }`.
+
+Root fragment: `<>...</>` returns `{ embeds: Embed[], components: ActionRow[] }`.
 
 # Example
 
 ## Single Row
 
 ```tsx
-import {
-  DiscordComponents,
-  MessageActionRow,
-  MessageButton,
-} from "discord.tsx";
+import { ButtonStyle } from "discord.js";
+import { DiscordComponents, ActionRow, Button } from "discord.tsx";
 
 client.on("messageCreate", (message) => {
   if (message.content === "=btn") {
     const componentData = (
       <>
-        <MessageActionRow>
-          <MessageButton style="PRIMARY" label="Primary" customId="primary" />
-          <MessageButton style="SECONDARY" label="Secondary" customId="secondary" />
-          <MessageButton style="DANGER" label="Danger" customId="danger" />
-          <MessageButton style="SUCCESS" label="Success" customId="success" />
-          <MessageButton style="LINK" label="Link" url="https://discord.js.org" />
-        </MessageActionRow>
+        <ActionRow>
+          <Button style={ButtonStyle["Primary"]} label="Primary" customId="primary" />
+          <Button style={ButtonStyle["Secondary"]} label="Secondary" customId="secondary" />
+          <Button style={ButtonStyle["Danger"]} label="Danger" customId="danger" />
+          <Button style={ButtonStyle["Success"]} label="Success" customId="success" />
+          <Button style={ButtonStyle["Link"]} label="Link" url="https://discord.js.org" />
+        </ActionRow>
       </>
     );
 
@@ -79,30 +78,27 @@ client.on("messageCreate", (message) => {
 ## Or Multiple
 
 ```tsx
-import {
-  DiscordComponents,
-  MessageActionRow,
-  MessageButton,
-} from "discord.tsx";
+import { ButtonStyle } from "discord.js";
+import { DiscordComponents, ActionRow, Button } from "discord.tsx";
 
 client.on("messageCreate", (message) => {
   if (message.content === "=btn") {
     const componentData = (
       <>
-        <MessageActionRow>
-          <MessageButton style="PRIMARY" label="Primary" customId="primary" />
-          <MessageButton style="SECONDARY" label="Secondary" customId="secondary" />
-          <MessageButton style="DANGER" label="Danger" customId="danger" />
-          <MessageButton style="SUCCESS" label="Success" customId="success" />
-          <MessageButton style="LINK" label="Link" url="https://discord.js.org" />
-        </MessageActionRow>
-        <MessageActionRow>
-          <MessageButton style="PRIMARY" label="Primary 2" customId="primary2" />
-          <MessageButton style="SECONDARY" label="Secondary 2" customId="secondary2" />
-          <MessageButton style="DANGER" label="Danger 2" customId="danger2" />
-          <MessageButton style="SUCCESS" label="Success 2" customId="success2" />
-          <MessageButton style="LINK" label="Link 2" url="https://discord.js.org" />
-        </MessageActionRow>
+        <ActionRow>
+          <Button style={ButtonStyle["Primary"]} label="Primary" customId="primary" />
+          <Button style={ButtonStyle["Secondary"]} label="Secondary" customId="secondary" />
+          <Button style={ButtonStyle["Danger"]} label="Danger" customId="danger" />
+          <Button style={ButtonStyle["Success"]} label="Success" customId="success" />
+          <Button style={ButtonStyle["Link"]} label="Link" url="https://discord.js.org" />
+        </ActionRow>
+        <ActionRow>
+          <Button style={ButtonStyle["Primary"]} label="Primary 2" customId="primary2" />
+          <Button style={ButtonStyle["Secondary"]} label="Secondary 2" customId="secondary2" />
+          <Button style={ButtonStyle["Danger"]} label="Danger 2" customId="danger2" />
+          <Button style={ButtonStyle["Success"]} label="Success 2" customId="success2" />
+          <Button style={ButtonStyle["Link"]} label="Link 2" url="https://discord.js.org" />
+        </ActionRow>
       </>
     );
 
@@ -118,100 +114,88 @@ client.on("messageCreate", (message) => {
 ## Select Menu
 
 ```tsx
-import {
-    DiscordComponents,
-    MessageActionRow,
-    MessageSelectMenu,
-    MessageSelectOption
-} from "discord.tsx";
+import { DiscordComponents, ActionRow, StringSelectMenu, SelectMenuOption } from "discord.tsx";
 
 client.on("messageCreate", (message) => {
-    if (message.content === "=select") {
-        const componentData = (
-            <>
-                <MessageActionRow>
-                    <MessageSelectMenu>
-                        <MessageSelectOption default={true} description="This is the first option" label="First" value="first" />
-                        <MessageSelectOption description="This is the second option" label="Second" value="second" />
-                        <MessageSelectOption description="This is the third option" label="Third" value="third" emoji="🥉" />
-                    </MessageSelectMenu>
-                </MessageActionRow>
-            </>
-        );
+  if (message.content === "=select") {
+    const componentData = (
+      <>
+        <ActionRow>
+          <StringSelectMenu>
+            <SelectMenuOption default={true} description="This is the first option" label="First" value="first" />
+            <SelectMenuOption description="This is the second option" label="Second" value="second" />
+            <SelectMenuOption description="This is the third option" label="Third" value="third" emoji="🥉" />
+          </StringSelectMenu>
+        </ActionRow>
+      </>
+    );
 
-        return message.channel.send({ ...componentData, content: "Select It" });
-    }
+    return message.channel.send({ ...componentData, content: "Select It" });
+  }
 });
 ```
 
 ### Preview
+
 ![](https://i.imgur.com/EmeGYYy.png)
 
 ## Message Embed
 
 ```tsx
-import {
-    DiscordComponents,
-    MessageEmbed,
-    MessageEmbedAuthor,
-    MessageEmbedFields,
-    MessageEmbedField,
-    MessageEmbedFooter,
-    MessageEmbedImage,
-    MessageEmbedThumbnail
-} from "discord.tsx";
+import { DiscordComponents, Embed, EmbedAuthor, EmbedFields, EmbedField, EmbedFooter, EmbedImage, EmbedThumbnail } from "discord.tsx";
 
 client.on("messageCreate", (message) => {
-    if (message.content === "=embed") {
-        const componentData = (
-            <>
-                <MessageEmbed color="RANDOM" timestamp={Date.now()} description="Hello World" url="https://github.com" title="Title">
-                    <MessageEmbedAuthor name="Author" iconURL="https://cdn.discordapp.com/emojis/828572926525177887.png?v=1" url="https://discord.com" />
-                    <MessageEmbedFields>
-                        <MessageEmbedField name="Hello" value="world" />
-                        <MessageEmbedField name="Goodbye" value="world" inline />
-                    </MessageEmbedFields>
-                    <MessageEmbedThumbnail url="https://cdn.discordapp.com/emojis/828572926525177887.png?v=1" />
-                    <MessageEmbedImage url="https://cdn.discordapp.com/emojis/828572926525177887.png?v=1" />
-                    <MessageEmbedFooter text="Footer" iconURL="https://cdn.discordapp.com/emojis/828572926525177887.png?v=1" />
-                </MessageEmbed>
-            </>
-        );
+  if (message.content === "=embed") {
+    const componentData = (
+      <>
+        <Embed color="Random" timestamp={Date.now()} description="Hello World" url="https://github.com" title="Title">
+          <EmbedAuthor name="Author" iconURL="https://cdn.discordapp.com/emojis/828572926525177887.png?v=1" url="https://discord.com" />
+          <EmbedFields>
+            <EmbedField name="Hello" value="world" />
+            <EmbedField name="Goodbye" value="world" inline />
+          </EmbedFields>
+          <EmbedThumbnail url="https://cdn.discordapp.com/emojis/828572926525177887.png?v=1" />
+          <EmbedImage url="https://cdn.discordapp.com/emojis/828572926525177887.png?v=1" />
+          <EmbedFooter text="Footer" iconURL="https://cdn.discordapp.com/emojis/828572926525177887.png?v=1" />
+        </Embed>
+      </>
+    );
 
-        return message.channel.send(componentData);
-    }
+    return message.channel.send(componentData);
+  }
 });
 ```
 
 ### Preview
+
 ![](https://i.imgur.com/eaqub2x.png)
 
 ## Other examples
 
 ```tsx
 const componentData = (
-    <>
-        <MessageActionRow>
-            {Array.from({ length: 5 }, (_, i) => (
-                <MessageButton style="PRIMARY" label={`Button ${++i}`} customId={`btn_${i}`} />
-            ))}
-        </MessageActionRow>
-        <MessageActionRow>
-            <MessageSelectMenu customId="123">
-                {Array.from({ length: 5 }, (_, i) => (
-                    <MessageSelectOption description={`Option number ${++i}`} label={`Option ${i}`} value={i.toString()} />
-                ))}
-            </MessageSelectMenu>
-        </MessageActionRow>
-        <MessageEmbed color="BLURPLE" title="Counter">
-            <MessageEmbedFields>
-                {Array.from({ length: 10 }, (_, i) => {
-                  const counter = ++i;
-                  return <MessageEmbedField name={`Count ${counter}`} value={`Counting ${counter}`} />
-                })}
-            </MessageEmbedFields>
-        </MessageEmbed>
-    </>
+  <>
+    <ActionRow>
+      {Array.from({ length: 5 }, (_, i) => (
+        <Button style={ButtonStyle["Primary"]} label={`Button ${++i}`} customId={`btn_${i}`} />
+      ))}
+    </ActionRow>
+    <ActionRow>
+      <StringSelectMenu customId="123">
+        {Array.from({ length: 5 }, (_, i) => (
+          <SelectMenuOption description={`Option number ${++i}`} label={`Option ${i}`} value={i.toString()} />
+        ))}
+      </StringSelectMenu>
+    </ActionRow>
+    <Embed color="Blurple" title="Counter">
+      <EmbedFields>
+        {Array.from({ length: 10 }, (_, i) => {
+          const counter = ++i;
+          return <EmbedField name={`Count ${counter}`} value={`Counting ${counter}`} />;
+        })}
+      </EmbedFields>
+    </Embed>
+  </>
 );
 
 return message.channel.send(componentData);

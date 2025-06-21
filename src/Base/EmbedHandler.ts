@@ -1,9 +1,9 @@
-import { MessageEmbed } from "discord.js";
-import { MessageEmbedComponent } from "../components/MessageEmbed/MessageEmbed.js";
+import { EmbedBuilder } from "discord.js";
+import { EmbedComponent } from "../components/Embed/Embed.js";
 
-export default function handleData(component: MessageEmbedComponent) {
+export default function handleData(component: EmbedComponent) {
   const props = component.props;
-  const embed = new MessageEmbed();
+  const embed = new EmbedBuilder();
 
   if (props.color) embed.setColor(props.color);
   if (props.timestamp) embed.setTimestamp(props.timestamp);
@@ -13,7 +13,7 @@ export default function handleData(component: MessageEmbedComponent) {
 
   component.children?.forEach((child) => {
     switch (child.type) {
-      case "MessageEmbedFields":
+      case "EmbedFields":
         {
           if (!child.children) {
             break;
@@ -22,22 +22,22 @@ export default function handleData(component: MessageEmbedComponent) {
           void embed.addFields(fieldData);
         }
         break;
-      case "MessageEmbedAuthor":
+      case "EmbedAuthor":
         {
           embed.setAuthor(child.props);
         }
         break;
-      case "MessageEmbedFooter":
+      case "EmbedFooter":
         {
           embed.setFooter(child.props);
         }
         break;
-      case "MessageEmbedImage":
+      case "EmbedImage":
         {
           embed.setImage(child.props.url);
         }
         break;
-      case "MessageEmbedThumbnail":
+      case "EmbedThumbnail":
         {
           embed.setThumbnail(child.props.url);
         }

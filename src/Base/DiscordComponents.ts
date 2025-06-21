@@ -1,7 +1,4 @@
-import {
-  MessageActionRow as DiscordMessageActionRow,
-  MessageEmbed,
-} from "discord.js";
+import { ActionRowBuilder, EmbedBuilder } from "discord.js";
 import {
   Atom,
   ComponentFactory,
@@ -9,8 +6,8 @@ import {
   ComponentPropTypes,
   FragmentResolvable,
 } from "../typings/types";
-import handleActionRow from "./ActionRowHandler";
-import handleEmbed from "./MessageEmbedHandler";
+import handleActionRow from "./ActionRowHandler.js";
+import handleEmbed from "./EmbedHandler.js";
 
 export class DiscordComponents {
   static createComponent<P = ComponentPropTypes>(
@@ -26,12 +23,12 @@ export class DiscordComponents {
   static Fragment(
     props: null,
     children: FragmentResolvable[],
-  ): { embeds: MessageEmbed[]; actionRows: DiscordMessageActionRow[] } {
+  ): { embeds: EmbedBuilder[]; actionRows: ActionRowBuilder[] } {
     if (props !== null)
       throw new TypeError("Root fragments must not have props.");
 
-    const actionRows: DiscordMessageActionRow[] = [];
-    const embeds: MessageEmbed[] = [];
+    const actionRows: ActionRowBuilder[] = [];
+    const embeds: EmbedBuilder[] = [];
 
     if (!children || children.length === 0) return { actionRows, embeds }; // Nothing to process.
 
@@ -41,10 +38,10 @@ export class DiscordComponents {
         return;
 
       switch (atom.type) {
-        case "MessageActionRow":
+        case "ActionRow":
           actionRows.push(handleActionRow(atom));
           break;
-        case "MessageEmbed":
+        case "Embed":
           embeds.push(handleEmbed(atom));
           break;
         default:

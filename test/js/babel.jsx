@@ -1,52 +1,53 @@
 /** @jsx DiscordComponents.createComponent */
 /** @jsxFrag DiscordComponents.Fragment */
 
+import { ButtonStyle } from "discord.js";
 import {
   DiscordComponents,
-  MessageActionRow,
-  MessageSelectMenu,
-  MessageSelectOption,
+  ActionRow,
+  StringSelectMenu,
+  SelectMenuOption,
   MessageButton,
-  MessageEmbed,
-  MessageEmbedFields,
-  MessageEmbedField,
+  Embed,
+  EmbedFields,
+  EmbedField,
 } from "../../out/index.js";
 
 const components = (
   <>
-    <MessageActionRow>
+    <ActionRow>
       {Array.from({ length: 5 }, (_, i) => (
         <MessageButton
-          style="PRIMARY"
+          style={ButtonStyle["Primary"]}
           label={`Button ${++i}`}
           customId={`btn_${i}`}
         />
       ))}
-    </MessageActionRow>
-    <MessageActionRow>
-      <MessageSelectMenu customId="123">
+    </ActionRow>
+    <ActionRow>
+      <StringSelectMenu customId="123">
         {Array.from({ length: 5 }, (_, i) => (
-          <MessageSelectOption
+          <SelectMenuOption
             description={`Option number ${++i}`}
             label={`Option ${i}`}
             value={i.toString()}
           />
         ))}
-      </MessageSelectMenu>
-    </MessageActionRow>
-    <MessageEmbed color="BLURPLE" title="Counter">
-      <MessageEmbedFields>
+      </StringSelectMenu>
+    </ActionRow>
+    <Embed color="Blurple" title="Counter">
+      <EmbedFields>
         {Array.from({ length: 10 }, (_, i) => {
           const counter = ++i;
           return (
-            <MessageEmbedField
+            <EmbedField
               name={`Count ${counter}`}
               value={`Counting ${counter}`}
             />
           );
         })}
-      </MessageEmbedFields>
-    </MessageEmbed>
+      </EmbedFields>
+    </Embed>
   </>
 );
 
