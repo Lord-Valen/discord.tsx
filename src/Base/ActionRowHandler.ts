@@ -1,18 +1,18 @@
 import {
-  MessageActionRow as DiscordMessageActionRow,
-  MessageButton as DiscordMessageButton,
-  MessageSelectMenu as DiscordMessageSelectMenu,
+  ActionRowBuilder,
+  ButtonBuilder,
+  StringSelectMenuBuilder,
 } from "discord.js";
 import {
-  MessageActionRowComponent,
-  MessageActionRowResolvable,
-} from "../components/MessageComponent/MessageActionRow.js";
-import { MessageSelectOptionComponent } from "../components/MessageComponent/MessageSelectMenu.js";
+  ActionRowComponent,
+  ActionRowResolvable,
+} from "../components/ActionRow/ActionRow.js";
+import { SelectMenuOptionComponent } from "../components/index.js";
 
 export default function handleData(
-  component: MessageActionRowComponent | MessageActionRowResolvable[],
-): DiscordMessageActionRow {
-  const actionRow = new DiscordMessageActionRow();
+  component: ActionRowComponent | ActionRowResolvable[],
+): ActionRowBuilder {
+  const actionRow = new ActionRowBuilder();
 
   for (const child of Array.isArray(component)
     ? component
@@ -25,7 +25,7 @@ export default function handleData(
     switch (child.type) {
       case "MessageButton":
         {
-          const buttonComponent = new DiscordMessageButton(child.props);
+          const buttonComponent = new ButtonBuilder(child.props);
           // const prop = child.props;
 
           // if (prop.customId) buttonComponent.setCustomId(prop.customId);
@@ -38,9 +38,9 @@ export default function handleData(
           actionRow.addComponents(buttonComponent);
         }
         break;
-      case "MessageSelectMenu":
+      case "StringSelectMenu":
         {
-          const selectMenu = new DiscordMessageSelectMenu(child.props);
+          const selectMenu = new StringSelectMenuBuilder(child.props);
           // const prop = child.props;
 
           // if (prop.customId) selectMenu.setCustomId(prop.customId);
@@ -51,9 +51,7 @@ export default function handleData(
 
           // add options
           const applyOptions = (
-            comp:
-              | MessageSelectOptionComponent[]
-              | MessageSelectOptionComponent[][],
+            comp: SelectMenuOptionComponent[] | SelectMenuOptionComponent[][],
           ): void => {
             for (const selectMenuChild of comp) {
               if (Array.isArray(selectMenuChild)) {

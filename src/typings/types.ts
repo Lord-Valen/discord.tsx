@@ -1,44 +1,45 @@
 import type {
-  MessageEmbedAuthor,
-  MessageEmbedFooter,
-  EmbedFieldData,
-  MessageEmbedImage,
-  MessageEmbedThumbnail,
-  MessageButtonOptions,
-  MessageSelectOptionData,
+  EmbedAuthorOptions,
+  EmbedFooterOptions,
+  EmbedField,
+  EmbedImageData,
+  SelectMenuComponentOptionData,
 } from "discord.js";
 import {
   EmbedProps,
-  MessageActionRowComponent,
-  MessageEmbedComponent,
-} from "..";
+  ActionRowComponent,
+  EmbedComponent,
+  ButtonOptions,
+  StringSelectMenuOptions,
+} from "../index.js";
 
+// This sucks
 export type ComponentPropTypes =
-  | MessageEmbedAuthor
-  | MessageEmbedFooter
-  | MessageEmbedImage
-  | MessageEmbedThumbnail
-  | EmbedFieldData
+  | (ButtonOptions & { customId?: string; url?: string })
+  | StringSelectMenuOptions
+  | SelectMenuComponentOptionData
   | EmbedProps
-  | MessageButtonOptions
-  | MessageSelectOptionData
+  | EmbedAuthorOptions
+  | EmbedFooterOptions
+  | EmbedField
+  | EmbedImageData
   | {}
   | undefined
   | null;
 
 export type ElementType =
   | "Root"
-  | "MessageActionRow"
-  | "MessageButton"
-  | "MessageSelectMenu"
-  | "MessageSelectOption"
-  | "MessageEmbed"
-  | "MessageEmbedAuthor"
-  | "MessageEmbedFooter"
-  | "MessageEmbedFields"
-  | "MessageEmbedField"
-  | "MessageEmbedThumbnail"
-  | "MessageEmbedImage";
+  | "ActionRow"
+  | "Button"
+  | "StringSelectMenu"
+  | "SelectMenuOption"
+  | "Embed"
+  | "EmbedAuthor"
+  | "EmbedFooter"
+  | "EmbedFields"
+  | "EmbedField"
+  | "EmbedThumbnail"
+  | "EmbedImage";
 
 export type Atom =
   | Component
@@ -50,17 +51,15 @@ export type Atom =
   | null
   | undefined;
 
-export type ComponentFactory<P = {}, C = Atom[]> = (
+export type ComponentFactory<P = ComponentPropTypes, C = Atom[]> = (
   props?: P,
   children?: C,
 ) => Component<P, C>;
 
-export interface Component<P = {}, C = Atom[]> {
+export interface Component<P = ComponentPropTypes, C = Atom[]> {
   type: ElementType;
   props: P;
   children?: C;
 }
 
-export type FragmentResolvable =
-  | MessageActionRowComponent
-  | MessageEmbedComponent;
+export type FragmentResolvable = ActionRowComponent | EmbedComponent;
