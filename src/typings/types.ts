@@ -1,53 +1,60 @@
 import type {
-    ColorResolvable,
-    MessageEmbedAuthor,
-    MessageEmbedFooter,
-    EmbedFieldData,
-    MessageEmbedImage,
-    MessageEmbedThumbnail,
-    MessageButtonOptions,
-    MessageSelectOptionData,
-    LinkButtonOptions,
-    MessageSelectMenuOptions
+  ColorResolvable,
+  MessageEmbedAuthor,
+  MessageEmbedFooter,
+  EmbedFieldData,
+  MessageEmbedImage,
+  MessageEmbedThumbnail,
+  MessageButtonOptions,
+  MessageSelectOptionData,
+  LinkButtonOptions,
+  MessageSelectMenuOptions,
 } from "discord.js";
 
-export type ComponentCreateTypes = 
-    | MessageEmbedAuthor
-    | MessageEmbedFooter
-    | MessageEmbedImage
-    | MessageEmbedThumbnail
-    | EmbedFieldData
-    | EmbedProps
-    | MessageButtonOptions
-    | MessageSelectOptionData;
+export type ComponentCreateTypes =
+  | MessageEmbedAuthor
+  | MessageEmbedFooter
+  | MessageEmbedImage
+  | MessageEmbedThumbnail
+  | EmbedFieldData
+  | EmbedProps
+  | MessageButtonOptions
+  | MessageSelectOptionData;
 
 export type ElementType =
-    | "Root" 
-    | "MessageActionRow"
-    | "MessageButton"
-    | "MessageSelectMenu"
-    | "MessageSelectOption"
-    | "MessageEmbed"
-    | "MessageEmbedAuthor"
-    | "MessageEmbedFooter"
-    | "MessageEmbedFields"
-    | "MessageEmbedField"
-    | "MessageEmbedThumbnail"
-    | "MessageEmbedImage";
+  | "Root"
+  | "MessageActionRow"
+  | "MessageButton"
+  | "MessageSelectMenu"
+  | "MessageSelectOption"
+  | "MessageEmbed"
+  | "MessageEmbedAuthor"
+  | "MessageEmbedFooter"
+  | "MessageEmbedFields"
+  | "MessageEmbedField"
+  | "MessageEmbedThumbnail"
+  | "MessageEmbedImage";
 
-export type Component<T = any> = (props?: T, children?: any) => MessageElement<T>;
+export type Component<T = any> = (
+  props?: T,
+  children?: any,
+) => MessageElement<T>;
 export interface MessageElement<T = any> {
-    type: ElementType;
-    props: T;
-    children?: MessageElement[] | undefined;
+  type: ElementType;
+  props: T;
+  children?: MessageElement[] | undefined;
 }
 
 export interface EmbedProps {
-    color?: ColorResolvable;
-    timestamp?: Date | number;
-    description?: string;
-    title?: string;
-    url?: string;
+  color?: ColorResolvable;
+  timestamp?: Date | number;
+  description?: string;
+  title?: string;
+  url?: string;
 }
 
-export type ChildrenType = MessageElement<MessageButtonOptions | LinkButtonOptions | MessageSelectMenuOptions> | MessageElement;
+export type ChildrenType =
+  | MessageElement<
+      MessageButtonOptions | LinkButtonOptions | MessageSelectMenuOptions
+    >
+  | MessageElement;
