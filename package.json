@@ -3,8 +3,8 @@
   "description": "Create Discord.js components in JSX",
   "version": "3.0.0",
   "type": "module",
-  "author": "DevAndromeda",
-  "license": "MIT",
+  "author": "Lord-Valen",
+  "license": "MIT-0",
   "homepage": "https://github.com/Lord-Valen/discord.tsx#readme",
   "repository": {
     "type": "git",
