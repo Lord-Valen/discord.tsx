@@ -18,8 +18,8 @@ $ npm i discord.js
 ### Add these in your **`tsconfig.json`#compilerOptions**
 
 ```json
-"jsxFactory": "DiscordComponents.createComponent",
 "jsx": "react",
+"jsxFactory": "DiscordComponents.createComponent",
 "jsxFragmentFactory": "DiscordComponents.Fragment"
 ```
 
@@ -34,6 +34,7 @@ Specify pragma for custom jsx factory with **[`@babel/plugin-transform-react-jsx
 
 # Components Available
 
+- MessageActionRow
 - MessageButton
 - MessageSelectMenu
 - MessageEmbed
