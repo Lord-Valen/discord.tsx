@@ -4,73 +4,126 @@ import {
   EmbedFieldData,
   MessageEmbedImage as DiscordMessageEmbedImage,
   MessageEmbedThumbnail as DiscordMessageEmbedThumbnail,
+  ColorResolvable,
 } from "discord.js";
-import { MessageElement, EmbedProps } from "../../typings/types.js";
+import { Component } from "../../typings/types.js";
 
-export function MessageEmbed(props: EmbedProps, children: MessageElement[]) {
+export type MessageEmbedResolvable =
+  | MessageEmbedAuthorComponent
+  | MessageEmbedFooterComponent
+  | MessageEmbedFieldsComponent
+  | MessageEmbedThumbnailComponent
+  | MessageEmbedImageComponent;
+
+export interface EmbedProps {
+  color?: ColorResolvable;
+  timestamp?: Date | number;
+  description?: string;
+  title?: string;
+  url?: string;
+}
+
+export type MessageEmbedComponent = Component<
+  EmbedProps,
+  MessageEmbedResolvable[]
+> & { type: "MessageEmbed" };
+export function MessageEmbed(
+  props: EmbedProps,
+  children: MessageEmbedResolvable[],
+): MessageEmbedComponent {
   return {
     type: "MessageEmbed",
     props,
     children,
-  } as MessageElement<EmbedProps>;
+  };
 }
 
+export type MessageEmbedAuthorComponent = Component<
+  DiscordMessageEmbedAuthor,
+  undefined
+> & { type: "MessageEmbedAuthor" };
 export function MessageEmbedAuthor(
   props: DiscordMessageEmbedAuthor,
-  _children: undefined,
-) {
+  _children: any,
+): MessageEmbedAuthorComponent {
   return {
     type: "MessageEmbedAuthor",
     props,
     children: undefined,
-  } as MessageElement<DiscordMessageEmbedAuthor>;
+  };
 }
 
+export type MessageEmbedFooterComponent = Component<
+  DiscordMessageEmbedFooter,
+  undefined
+> & { type: "MessageEmbedFooter" };
 export function MessageEmbedFooter(
   props: DiscordMessageEmbedFooter,
   _children: undefined,
-) {
+): MessageEmbedFooterComponent {
   return {
     type: "MessageEmbedFooter",
     props,
     children: undefined,
-  } as MessageElement<DiscordMessageEmbedFooter>;
+  };
 }
 
-export function MessageEmbedFields(_props: any, children: MessageElement[]) {
+export type MessageEmbedFieldsComponent = Component<
+  {},
+  MessageEmbedFieldComponent[] | MessageEmbedFieldComponent[][]
+> & { type: "MessageEmbedFields" };
+export function MessageEmbedFields(
+  _props: any,
+  children: MessageEmbedFieldComponent[] | MessageEmbedFieldComponent[][],
+): MessageEmbedFieldsComponent {
   return {
     type: "MessageEmbedFields",
-    props: undefined,
+    props: {},
     children,
-  } as MessageElement;
+  };
 }
 
-export function MessageEmbedField(props: EmbedFieldData, _children: undefined) {
+export type MessageEmbedFieldComponent = Component<
+  EmbedFieldData,
+  undefined
+> & { type: "MessageEmbedField" };
+export function MessageEmbedField(
+  props: EmbedFieldData,
+  _children: undefined,
+): MessageEmbedFieldComponent {
   return {
     type: "MessageEmbedField",
     props,
     children: undefined,
-  } as MessageElement<EmbedFieldData>;
+  };
 }
 
+export type MessageEmbedThumbnailComponent = Component<
+  DiscordMessageEmbedThumbnail,
+  undefined
+> & { type: "MessageEmbedThumbnail" };
 export function MessageEmbedThumbnail(
   props: DiscordMessageEmbedThumbnail,
   _children: undefined,
-) {
+): MessageEmbedThumbnailComponent {
   return {
     type: "MessageEmbedThumbnail",
     props,
     children: undefined,
-  } as MessageElement<DiscordMessageEmbedThumbnail>;
+  };
 }
 
+export type MessageEmbedImageComponent = Component<
+  DiscordMessageEmbedImage,
+  undefined
+> & { type: "MessageEmbedImage" };
 export function MessageEmbedImage(
   props: DiscordMessageEmbedImage,
   _children: undefined,
-) {
+): MessageEmbedImageComponent {
   return {
     type: "MessageEmbedImage",
     props,
     children: undefined,
-  } as MessageElement<DiscordMessageEmbedImage>;
+  };
 }

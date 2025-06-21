@@ -3,63 +3,58 @@ import {
   MessageEmbed,
 } from "discord.js";
 import {
+  Atom,
+  ComponentFactory,
   Component,
-  MessageElement,
-  ComponentCreateTypes,
+  ComponentPropTypes,
+  FragmentResolvable,
 } from "../typings/types";
 import handleActionRow from "./ActionRowHandler";
 import handleEmbed from "./MessageEmbedHandler";
 
 export class DiscordComponents {
-  static createComponent<T = any>(
-    component: Component<T>,
-    props: T,
-    ...children: Array<MessageElement<ComponentCreateTypes>>
-  ): MessageElement<T> {
+  static createComponent<P = ComponentPropTypes>(
+    component: ComponentFactory<P>,
+    props: P,
+    ...children: Atom[]
+  ): Component<P> {
     if (component === undefined) return void 0 as any;
     const element = component(props, children);
     return element;
   }
 
-  static fragment(
-    props: null,
-    components: MessageElement[],
-  ): { embeds: MessageEmbed[]; components: DiscordMessageActionRow[] } {
-    process.emitWarning(
-      "DiscordComponents.fragment is deprecated, use DiscordComponents.Fragment instead!",
-    );
-    return DiscordComponents.Fragment(props, components);
-  }
-
   static Fragment(
     props: null,
-    components: MessageElement[],
-  ): { embeds: MessageEmbed[]; components: DiscordMessageActionRow[] } {
+    children: FragmentResolvable[],
+  ): { embeds: MessageEmbed[]; actionRows: DiscordMessageActionRow[] } {
     if (props !== null)
-      throw new TypeError("Root fragments may not have props");
-    const actionRowData: DiscordMessageActionRow[] = [];
-    const embedData: MessageEmbed[] = [];
+      throw new TypeError("Root fragments must not have props.");
 
-    components.forEach((component) => {
-      if (typeof component !== "object") return;
+    const actionRows: DiscordMessageActionRow[] = [];
+    const embeds: MessageEmbed[] = [];
 
-      switch (component.type) {
+    if (!children || children.length === 0) return { actionRows, embeds }; // Nothing to process.
+
+    children.forEach((atom) => {
+      // Only process if atom is a Component
+      if (typeof atom !== "object" || atom === null || !("type" in atom))
+        return;
+
+      switch (atom.type) {
         case "MessageActionRow":
-          actionRowData.push(handleActionRow(component));
+          actionRows.push(handleActionRow(atom));
           break;
         case "MessageEmbed":
-          embedData.push(handleEmbed(component));
+          embeds.push(handleEmbed(atom));
           break;
         default:
-          throw new TypeError(
-            `Unsupported parent component "${component.type}"!`,
-          );
+          throw new TypeError(`Unsupported parent component: "${atom}"!`);
       }
     });
 
     return {
-      embeds: embedData,
-      components: actionRowData,
+      embeds,
+      actionRows,
     };
   }
 }

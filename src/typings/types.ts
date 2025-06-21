@@ -1,5 +1,4 @@
 import type {
-  ColorResolvable,
   MessageEmbedAuthor,
   MessageEmbedFooter,
   EmbedFieldData,
@@ -7,11 +6,14 @@ import type {
   MessageEmbedThumbnail,
   MessageButtonOptions,
   MessageSelectOptionData,
-  LinkButtonOptions,
-  MessageSelectMenuOptions,
 } from "discord.js";
+import {
+  EmbedProps,
+  MessageActionRowComponent,
+  MessageEmbedComponent,
+} from "..";
 
-export type ComponentCreateTypes =
+export type ComponentPropTypes =
   | MessageEmbedAuthor
   | MessageEmbedFooter
   | MessageEmbedImage
@@ -19,7 +21,10 @@ export type ComponentCreateTypes =
   | EmbedFieldData
   | EmbedProps
   | MessageButtonOptions
-  | MessageSelectOptionData;
+  | MessageSelectOptionData
+  | {}
+  | undefined
+  | null;
 
 export type ElementType =
   | "Root"
@@ -35,26 +40,27 @@ export type ElementType =
   | "MessageEmbedThumbnail"
   | "MessageEmbedImage";
 
-export type Component<T = any> = (
-  props?: T,
-  children?: any,
-) => MessageElement<T>;
-export interface MessageElement<T = any> {
+export type Atom =
+  | Component
+  | object
+  | string
+  | number
+  | bigint
+  | boolean
+  | null
+  | undefined;
+
+export type ComponentFactory<P = {}, C = Atom[]> = (
+  props?: P,
+  children?: C,
+) => Component<P, C>;
+
+export interface Component<P = {}, C = Atom[]> {
   type: ElementType;
-  props: T;
-  children?: MessageElement[] | undefined;
+  props: P;
+  children?: C;
 }
 
-export interface EmbedProps {
-  color?: ColorResolvable;
-  timestamp?: Date | number;
-  description?: string;
-  title?: string;
-  url?: string;
-}
-
-export type ChildrenType =
-  | MessageElement<
-      MessageButtonOptions | LinkButtonOptions | MessageSelectMenuOptions
-    >
-  | MessageElement;
+export type FragmentResolvable =
+  | MessageActionRowComponent
+  | MessageEmbedComponent;
