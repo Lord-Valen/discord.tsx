@@ -32,10 +32,10 @@
     "build": "tsup",
     "postbuild": "node scripts/postbuild.mjs",
     "lint": "tsc --noEmit",
-    "test:babel": "node test/babel.js",
-    "test:babel:build": "babel test/babel.jsx -d test",
-    "test:ts": "node test/typescript.js",
-    "test:ts:build": "tsc test/typescript.tsx --outDir test"
+    "test:babel": "node test/js-out/babel.js",
+    "test:babel:build": "babel test/js/babel.jsx --relative -d ../js-out",
+    "test:ts": "node test/ts-out/typescript.js",
+    "test:ts:build": "tsc -p test/tsconfig.json"
   },
   "files": [
     "out"
