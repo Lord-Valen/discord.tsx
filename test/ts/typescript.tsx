@@ -1,4 +1,3 @@
-// @ts-nocheck
 import {
   DiscordComponents,
   MessageActionRow,
@@ -6,19 +5,16 @@ import {
   MessageSelectOption,
   MessageButton,
   MessageEmbed,
-  MessageEmbedAuthor,
   MessageEmbedFields,
   MessageEmbedField,
-  MessageEmbedFooter,
-  MessageEmbedImage,
-  MessageEmbedThumbnail,
-} from "../out/index";
+} from "../../out/index.js";
 
 const components = (
   <>
     <MessageActionRow>
       {Array.from({ length: 5 }, (_, i) => (
         <MessageButton
+          type={"BUTTON"}
           style="PRIMARY"
           label={`Button ${++i}`}
           customId={`btn_${i}`}

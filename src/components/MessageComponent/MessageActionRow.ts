@@ -1,10 +1,22 @@
-import { MessageActionRowOptions } from "discord.js";
-import { MessageElement } from "../../typings/types";
+import { Component } from "../../typings/types.js";
+import { MessageButtonComponent } from "./MessageButton.js";
+import { MessageSelectMenuComponent } from "./MessageSelectMenu.js";
 
-export function MessageActionRow(props: {}, children: MessageElement[]) {
-    return {
-        type: "MessageActionRow",
-        props,
-        children
-    } as MessageElement<MessageActionRowOptions>;
+export type MessageActionRowResolvable =
+  | MessageButtonComponent
+  | MessageSelectMenuComponent;
+
+export type MessageActionRowComponent = Component<
+  {},
+  MessageActionRowResolvable[] | MessageActionRowResolvable[][]
+> & { type: "MessageActionRow" };
+export function MessageActionRow(
+  _props: {},
+  children: MessageActionRowResolvable[],
+): MessageActionRowComponent {
+  return {
+    type: "MessageActionRow",
+    props: {},
+    children,
+  };
 }
